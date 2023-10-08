@@ -15,6 +15,7 @@
 import cv2
 from PIL import Image
 from pytesseract import pytesseract
+import pyttsx3
 
 camera=cv2.VideoCapture(0)
 
@@ -36,6 +37,14 @@ def tesseract():
     pytesseract.tesseract_cmd = link
     text = pytesseract.image_to_string(Image.open(ImageName))
     print(text)
+    return text
 
-tesseract()
+
+def texttospeech():
+    engine = pyttsx3.init()
+    engine.say(tesseract())
+    engine.runAndWait()
+
+
+texttospeech()
 
